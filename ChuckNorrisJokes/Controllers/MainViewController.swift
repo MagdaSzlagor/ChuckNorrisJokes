@@ -54,7 +54,7 @@ class MainViewController: UIViewController {
         
         var urlString = apiEndpoint + "&firstName=" + firstName + "&lastName=" + lastName
         // just in case we have some spaces in names
-        urlString = urlString.replacingOccurrences(of: " ", with: "%20")
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: urlString)
         WebService().load(resource: WebService.parseResponse(withURL: url!)) { [unowned self] result in
             switch result {
